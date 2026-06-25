@@ -1,0 +1,8 @@
+names:
+- Cattle-Mouth
+- Nostril
+nc: 2
+path: /content/DATASETYOLOCROPPED
+test: test/images
+train: train/images
+val: valid/images
