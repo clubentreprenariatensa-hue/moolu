@@ -1,0 +1,46 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, add-android-build-workflow ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'latest'
+          channel: 'stable'
+
+      - name: Get Flutter packages
+        run: |
+          cd NagglyApp_SourceCode
+          flutter pub get
+
+      - name: Build APK
+        run: |
+          cd NagglyApp_SourceCode
+          flutter build apk --release
+
+      - name: Upload APK to artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: naggly-os-release
+          path: NagglyApp_SourceCode/build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
+
+      - name: Create Release (on tag push)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: NagglyApp_SourceCode/build/app/outputs/flutter-apk/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
