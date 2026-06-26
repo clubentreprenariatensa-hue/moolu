@@ -41,7 +41,7 @@ android {
 
     defaultConfig {
         applicationId "com.naggly.naggly_os"
-        minSdkVersion 21          // Android 5.0 = vieux téléphones supportés ✅
+        minSdkVersion 26          // Requis par tflite_flutter
         targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
