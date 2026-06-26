@@ -23,6 +23,9 @@ jobs:
       - name: Verify Flutter setup
         run: flutter --version && flutter doctor
 
+      - name: Clean Flutter
+        run: cd NagglyApp_SourceCode && flutter clean
+
       - name: Get Flutter packages
         run: cd NagglyApp_SourceCode && flutter pub get
 
