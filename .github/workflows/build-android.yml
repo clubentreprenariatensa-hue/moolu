@@ -2,7 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ main, add-android-build-workflow ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -21,14 +21,12 @@ jobs:
           channel: 'stable'
 
       - name: Get Flutter packages
-        run: |
-          cd NagglyApp_SourceCode
-          flutter pub get
+        working-directory: ./NagglyApp_SourceCode
+        run: flutter pub get
 
       - name: Build APK
-        run: |
-          cd NagglyApp_SourceCode
-          flutter build apk --release
+        working-directory: ./NagglyApp_SourceCode
+        run: flutter build apk --release
 
       - name: Upload APK to artifacts
         uses: actions/upload-artifact@v3
