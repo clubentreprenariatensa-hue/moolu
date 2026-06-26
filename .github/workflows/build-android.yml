@@ -20,6 +20,9 @@ jobs:
           flutter-version: '3.22.0'
           channel: 'stable'
 
+      - name: Verify Flutter setup
+        run: flutter --version && flutter doctor
+
       - name: Get Flutter packages
         run: cd NagglyApp_SourceCode && flutter pub get
 
