@@ -23,7 +23,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
     namespace "com.naggly.naggly_os"
-    compileSdkVersion 34
+    compileSdkVersion 35
     ndkVersion "25.2.9519653"  // Nécessaire pour compiler le C++ (OpenCV AFIS)
 
     compileOptions {
@@ -41,8 +41,8 @@ android {
 
     defaultConfig {
         applicationId "com.naggly.naggly_os"
-        minSdkVersion 21          // Android 5.0 = vieux téléphones supportés ✅
-        targetSdkVersion 34
+        minSdkVersion 26          // Requis par tflite_flutter
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 
@@ -65,7 +65,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             signingConfig signingConfigs.debug  // Pour le CI/CD (à remplacer par une clé de prod)
         }
     }
