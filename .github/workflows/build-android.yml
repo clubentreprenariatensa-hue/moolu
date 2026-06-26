@@ -21,12 +21,10 @@ jobs:
           channel: 'stable'
 
       - name: Get Flutter packages
-        working-directory: ./NagglyApp_SourceCode
-        run: flutter pub get
+        run: cd NagglyApp_SourceCode && flutter pub get
 
       - name: Build APK
-        working-directory: ./NagglyApp_SourceCode
-        run: flutter build apk --release
+        run: cd NagglyApp_SourceCode && flutter build apk --release
 
       - name: Upload APK to artifacts
         uses: actions/upload-artifact@v4
