@@ -1,0 +1,45 @@
+name: naggly_os
+description: "Système d'identification biométrique (AFIS) pour bovins. Edge AI."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Interface utilisateur
+  cupertino_icons: ^1.0.6
+
+  # Accès à la Caméra (pour le scan temps réel)
+  camera: ^0.10.5+9
+  image_picker: ^1.1.2   # Permet de lancer la caméra ou la galerie depuis l'UI
+
+  # Intelligence Artificielle Edge (YOLO)
+  tflite_flutter: ^0.10.4
+
+  # Base de données locale (50k vaches)
+  sqflite: ^2.3.0
+  path_provider: ^2.1.2
+  path: ^1.9.0        # Manquait ! Nécessaire pour join() dans database_helper.dart
+
+  # Interface C++ Native (Zéro latence)
+  ffi: ^2.1.2
+
+  # Compression SMS (Zlib)
+  archive: ^3.4.10
+
+  # Manipulation d'images en Dart (Crop, Resize pour YOLO)
+  image: ^4.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/models/best_float16.tflite
+    - assets/models/naggly_data.yaml
